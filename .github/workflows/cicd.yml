@@ -1,0 +1,63 @@
+name: CI/CD - DPI Tintas HP
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Validar Compilacao
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - name: Validar sintaxe
+        run: |
+          python -m py_compile config/theme.py
+          python -m py_compile models/database.py
+          python -m py_compile models/tinta_model.py
+          python -m py_compile views/components.py
+          python -m py_compile views/main_view.py
+          python -m py_compile views/config_modal.py
+          python -m py_compile controllers/main_controller.py
+          python -m py_compile main.py
+      - name: Validar imports
+        run: |
+          python -c "from config.theme import DPITheme; print('OK')"
+
+  cd:
+    name: Build .exe e Publicar Release
+    runs-on: windows-latest
+    needs: ci
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - name: Build executavel
+        run: python build.py
+      - name: Criar Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/DPI-Tintas-HP.exe
+          generate_release_notes: true
