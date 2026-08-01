@@ -54,10 +54,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-      - name: Build executavel
+      - name: Instalar Inno Setup
+        run: |
+          choco install innosetup -y
+          echo "C:\Program Files (x86)\Inno Setup 6" >> $env:GITHUB_PATH
+      - name: Build executavel e instalador
         run: python build.py
       - name: Criar Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/DPI-Tintas-HP.exe
+          files: |
+            dist/DPI-Tintas-HP.exe
+            installer/DPI-Tintas-HP-Setup.exe
           generate_release_notes: true

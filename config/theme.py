@@ -18,6 +18,16 @@ def get_app_dir() -> str:
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def get_data_dir() -> str:
+    """Retorna diretorio gravavel para dados (banco de configuracoes)."""
+    if getattr(sys, "frozen", False):
+        data_dir = os.path.join(os.environ.get("LOCALAPPDATA", ""), "DPI Tintas HP")
+    else:
+        data_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.makedirs(data_dir, exist_ok=True)
+    return data_dir
+
+
 def get_font_path(font_name: str) -> str:
     """Retorna caminho completo da fonte."""
     return get_asset_path(f"fonts/{font_name}.ttf")
@@ -30,7 +40,7 @@ class DPITheme:
     LOGO_PATH = get_asset_path("src/images/logo-64x64.png")
     FAVICON_PATH = get_asset_path("src/images/favicon.ico")
 
-    DB_DIR = get_app_dir()
+    DB_DIR = get_data_dir()
     DB_PATH = os.path.join(DB_DIR, "tintas_controle.db")
 
     # --- TOKENS DE CORES (Light, Dark) ---

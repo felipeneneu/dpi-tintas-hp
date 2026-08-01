@@ -22,6 +22,7 @@ agent/*
 # Build
 build/
 dist/
+installer/
 *.spec
 
 # Database
