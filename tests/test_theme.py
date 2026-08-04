@@ -29,3 +29,30 @@ class TestParseReais:
 
     def test_parse_invalido(self):
         assert DPITheme.parse_reais("abc") == 0
+
+
+class TestCores:
+    def test_cores_tem_7_entradas(self):
+        assert len(DPITheme.CORES) == 7
+
+    def test_cores_contem_cmyk_lclm_op(self):
+        esperadas = {"C", "M", "Y", "K", "LC", "LM", "OP"}
+        assert set(DPITheme.CORES.keys()) == esperadas
+
+    def test_cada_cor_tem_campos(self):
+        for cor, dados in DPITheme.CORES.items():
+            assert "name" in dados, f"Cor {cor} sem 'name'"
+            assert "hex" in dados, f"Cor {cor} sem 'hex'"
+            assert "text_color" in dados, f"Cor {cor} sem 'text_color'"
+
+    def test_cores_cores_names(self):
+        assert DPITheme.CORES["C"]["name"] == "Cyan"
+        assert DPITheme.CORES["M"]["name"] == "Magenta"
+        assert DPITheme.CORES["Y"]["name"] == "Yellow"
+        assert DPITheme.CORES["K"]["name"] == "Black"
+        assert DPITheme.CORES["LC"]["name"] == "Light Cyan"
+        assert DPITheme.CORES["LM"]["name"] == "Light Magenta"
+        assert DPITheme.CORES["OP"]["name"] == "Opaca"
+
+    def test_cmyk_alias(self):
+        assert DPITheme.CMYK is DPITheme.CORES

@@ -34,76 +34,82 @@ def get_font_path(font_name: str) -> str:
 
 
 class DPITheme:
-    # --- PATHS DOS ASSETS ---
     IMAGES_DIR = get_asset_path("src/images")
-
     LOGO_PATH = get_asset_path("src/images/logo-64x64.png")
     FAVICON_PATH = get_asset_path("src/images/favicon.ico")
 
     DB_DIR = get_data_dir()
     DB_PATH = os.path.join(DB_DIR, "tintas_controle.db")
 
-    # --- TOKENS DE CORES (Light, Dark) ---
-    PRIMARY = ("#0F172A", "#0F172A")
-    PRIMARY_LIGHT = ("#1E293B", "#1E293B")
-    ACCENT = ("#0369A1", "#0369A1")
-    ACCENT_HOVER = ("#0284C7", "#0284C7")
+    # --- CORES macOS ---
+    BG_WINDOW = ("#F5F5F7", "#1C1C1E")
+    SURFACE_CARD = ("#FFFFFF", "#2C2C2E")
+    SURFACE_INPUT = ("#E5E5EA", "#3A3A3C")
 
-    BG_WINDOW = ("#F8FAFC", "#0F172A")
-    SURFACE_CARD = ("#FFFFFF", "#1E293B")
-    SURFACE_INPUT = ("#F1F5F9", "#0F172A")
+    ACCENT = ("#007AFF", "#0A84FF")
+    ACCENT_HOVER = ("#0066CC", "#007AFF")
+    ACCENT_LIGHT = ("#B3D7FF", "#0A84FF")
 
-    BORDER = ("#E2E8F0", "#334155")
-    BORDER_LIGHT = ("#E2E8F0", "#334155")
-    TEXT_MAIN = ("#0F172A", "#F8FAFC")
-    TEXT_MUTED = ("#64748B", "#94A3B8")
+    SUCCESS = ("#34C759", "#30D158")
+    SUCCESS_HOVER = ("#2DA44E", "#28BD4B")
+    DANGER = ("#FF3B30", "#FF453A")
+    DANGER_HOVER = ("#D32F2F", "#D32F2F")
+    WARNING = ("#FF9500", "#FF9F0A")
+    WARNING_HOVER = ("#E08600", "#E08600")
 
-    SUCCESS = ("#10B981", "#10B981")
-    SUCCESS_BG = ("#D1FAE5", "#064E3B")
-    DANGER = ("#EF4444", "#EF4444")
-    WARNING = ("#F59E0B", "#F59E0B")
+    TEXT_PRIMARY = ("#1D1D1F", "#F5F5F7")
+    TEXT_SECONDARY = ("#6E6E73", "#98989D")
+    TEXT_TERTIARY = ("#AEAEB2", "#636366")
+    TEXT_ON_ACCENT = ("#FFFFFF", "#FFFFFF")
 
-    # --- GLASSMORPHISM ---
-    GLASS_BG = ("#FFFFFF", "#1E293B")
-    GLASS_BORDER = ("#E2E8F0", "#334155")
-    GLASS_SHADOW = ("#E2E8F0", "#000000")
+    BORDER = ("#D2D2D7", "#48484A")
+    BORDER_LIGHT = ("#E5E5EA", "#3A3A3C")
+    DIVIDER = ("#C6C6C8", "#48484A")
 
-    # --- PALETA CMYK PARA A INTERFACE ---
-    CMYK = {
+    # --- PALETA DE CORES PARA A INTERFACE (7 cores) ---
+    CORES = {
         "C": {"name": "Cyan", "hex": "#00AEEF", "text_color": "#FFFFFF"},
         "M": {"name": "Magenta", "hex": "#EC008C", "text_color": "#FFFFFF"},
         "Y": {"name": "Yellow", "hex": "#EAB308", "text_color": "#000000"},
         "K": {"name": "Black", "hex": "#334155", "text_color": "#FFFFFF"},
+        "LC": {"name": "Light Cyan", "hex": "#67D5FF", "text_color": "#000000"},
+        "LM": {"name": "Light Magenta", "hex": "#F57FC7", "text_color": "#000000"},
+        "OP": {"name": "Opaca", "hex": "#D1D5DB", "text_color": "#000000"},
     }
+    CMYK = CORES
 
-    # --- TIPOGRAFIA (Poppins + Open Sans) ---
-    FONT_FAMILY_HEADING = "Poppins"
-    FONT_FAMILY_BODY = "Open Sans"
-    FONT_FAMILY_MONO = "Consolas"
+    # --- TIPOGRAFIA ---
+    FONT_FAMILY = "Segoe UI"
+    FONT_MONO = "Cascadia Code"
 
-    FONT_TITLE = (FONT_FAMILY_HEADING, 16, "bold")
-    FONT_SUBTITLE = (FONT_FAMILY_HEADING, 13, "bold")
-    FONT_LABEL = (FONT_FAMILY_BODY, 11, "bold")
-    FONT_VALUE = (FONT_FAMILY_MONO, 14, "bold")
-    FONT_MENU = (FONT_FAMILY_BODY, 11)
-    FONT_SMALL = (FONT_FAMILY_BODY, 10)
-    FONT_BUTTON = (FONT_FAMILY_HEADING, 12, "bold")
+    FONT_TITLE = (FONT_FAMILY, 18, "bold")
+    FONT_SUBTITLE = (FONT_FAMILY, 14, "bold")
+    FONT_LABEL = (FONT_FAMILY, 12, "bold")
+    FONT_BODY = (FONT_FAMILY, 12)
+    FONT_SMALL = (FONT_FAMILY, 11)
+    FONT_BUTTON = (FONT_FAMILY, 12, "bold")
+    FONT_VALUE = (FONT_MONO, 13, "bold")
+    FONT_MENU = (FONT_FAMILY, 12)
+
+    # --- ESPACAMENTO (Grid 8px) ---
+    SPACING_XS = 4
+    SPACING_SM = 8
+    SPACING_MD = 16
+    SPACING_LG = 24
+    SPACING_XL = 32
 
     # --- RAIO DE BORDA ---
-    RADIUS_CARD = 12
-    RADIUS_INPUT = 8
-    RADIUS_BUTTON = 10
-    RADIUS_BADGE = 50
+    RADIUS_SM = 6
+    RADIUS_MD = 10
+    RADIUS_LG = 14
+    RADIUS_XL = 20
+    RADIUS_CIRCLE = 9999
 
-    # --- SOMBRAS ---
-    SHADOW_SM = "#E2E8F0"
-    SHADOW_MD = "#CBD5E1"
-    SHADOW_LG = "#94A3B8"
-
-    # --- TRANSICOES ---
-    TRANSITION_FAST = 150
-    TRANSITION_NORMAL = 200
-    TRANSITION_SLOW = 300
+    # --- LEGADO (manter compatibilidade) ---
+    RADIUS_CARD = RADIUS_MD
+    RADIUS_INPUT = RADIUS_SM
+    RADIUS_BUTTON = RADIUS_SM
+    RADIUS_BADGE = RADIUS_CIRCLE
 
     # --- MASCARA MONETARIA (centavos) ---
     @staticmethod
